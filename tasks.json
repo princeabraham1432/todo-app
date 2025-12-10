@@ -1,14 +1,14 @@
 [
     {
-        "task": "Solve Two Sum on LeetCode",
-        "done": false
-    },
-    {
         "task": "Finish Day 2 stock problem",
         "done": true
     },
     {
         "task": "Push Day 2 changes to GitHub",
+        "done": false
+    },
+    {
+        "task": "Learn Anagram",
         "done": false
     }
 ]

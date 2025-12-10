@@ -5,6 +5,7 @@ import os
 FILE = "tasks.json"
 
 
+# Load tasks from file
 def load_tasks():
     if not os.path.exists(FILE):
         return []
@@ -12,11 +13,13 @@ def load_tasks():
         return json.load(f)
 
 
+# Save tasks to file
 def save_tasks(tasks):
     with open(FILE, "w") as f:
         json.dump(tasks, f, indent=4)
 
 
+# Add a task
 def add_task(task):
     tasks = load_tasks()
     tasks.append({"task": task, "done": False})
@@ -24,6 +27,7 @@ def add_task(task):
     print(f"Added: {task}")
 
 
+# List all tasks
 def list_tasks():
     tasks = load_tasks()
     if not tasks:
@@ -35,6 +39,7 @@ def list_tasks():
         print(f"{i}. {t['task']}  [{status}]")
 
 
+# Mark a task as done
 def mark_done(task_index):
     tasks = load_tasks()
     if task_index < 1 or task_index > len(tasks):
@@ -46,12 +51,26 @@ def mark_done(task_index):
     print(f"Marked task #{task_index} as done ✔️")
 
 
+# Delete a task
+def delete_task(task_index):
+    tasks = load_tasks()
+    if task_index < 1 or task_index > len(tasks):
+        print("Invalid task number!")
+        return
+
+    removed = tasks.pop(task_index - 1)
+    save_tasks(tasks)
+    print(f"Deleted task: {removed['task']}")
+
+
+# Main command handler
 def main():
     if len(sys.argv) < 2:
         print("Usage:")
         print("  py todo.py add \"task name\"")
         print("  py todo.py list")
         print("  py todo.py done <task_number>")
+        print("  py todo.py delete <task_number>")
         return
 
     command = sys.argv[1]
@@ -69,6 +88,13 @@ def main():
             return
         index = int(sys.argv[2])
         mark_done(index)
+
+    elif command == "delete":
+        if len(sys.argv) < 3:
+            print("Please give the task number. Example: py todo.py delete 1")
+            return
+        index = int(sys.argv[2])
+        delete_task(index)
 
     else:
         print("Unknown command")
