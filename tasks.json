@@ -1,6 +1,6 @@
 [
     {
-        "task": "Finish Day 2 stock problem",
+        "task": "New Task Name Updated",
         "done": true
     },
     {
@@ -9,6 +9,10 @@
     },
     {
         "task": "Learn Anagram",
+        "done": false
+    },
+    {
+        "task": "Old Task Name",
         "done": false
     }
 ]
